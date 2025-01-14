@@ -4,18 +4,10 @@ services:
   node:
     restart: unless-stopped
     build: .
+    image: hyperliquid-node:latest
     ports:
       - "4000-4010:4000-4010"
+    entrypoint: "/home/hluser/hl-visor run-validator"
     volumes:
-      - hl-data:/home/hluser/hl/data
-
-  pruner:
-    restart: unless-stopped
-    build: ./pruner
-    volumes:
-      - hl-data:/home/hluser/hl/data
-
-
-volumes:
-  hl-data:
-    driver: local
+      - /home/hyperliquid/hl/data:/home/hluser/hl/data
+      - /home/hyperliquid/hl/hyperliquid_data:/home/hluser/hl/hyperliquid_data
